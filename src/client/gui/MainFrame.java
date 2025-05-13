@@ -20,38 +20,38 @@ public class MainFrame extends JFrame {
         Font poppins = loadFont("resources/fonts/Poppins-Regular.ttf", 18f);
         Font poppinsBold = loadFont("resources/fonts/Poppins-Bold.ttf", 22f);
         Font poppinsExtraBold = loadFont("resources/fonts/Poppins-ExtraBold.ttf", 32f);
+        Font poppinsExtraBoldItalic = loadFont("resources/fonts/Poppins-ExtraBoldItalic.ttf", 32f);
         setUIFont(poppins);
 
         // HEADER
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(Color.decode("#ff914d"));
-        header.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        header.setBorder(BorderFactory.createEmptyBorder(10, 1, 10, 20));
 
         // Panel izquierdo con logo + texto
         JPanel leftHeader = new JPanel();
         leftHeader.setOpaque(false);
-        leftHeader.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        leftHeader.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        JLabel logo = new JLabel(new ImageIcon("resources/images/logo.png")); // Asegúrate que exista
+        ImageIcon icon = new ImageIcon("resources/images/logo.png");
+        Image scaled = icon.getImage().getScaledInstance(167, 69, Image.SCALE_SMOOTH); // Ajusta tamaño aquí
+        JLabel logo = new JLabel(new ImageIcon(scaled));
+        logo.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Sin margen
+
         JLabel logoText = new JLabel("FastSender");
-        logoText.setFont(poppinsExtraBold);
+        logoText.setFont(poppinsExtraBoldItalic.deriveFont(26f));
         logoText.setForeground(Color.WHITE);
+        logoText.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0)); // Pegado al logo
 
         leftHeader.add(logo);
         leftHeader.add(logoText);
 
-        // Botón de iniciar sesión
-        JButton loginButton = new JButton("Iniciar sesión");
-        loginButton.setFont(poppins);
+        // Botón de iniciar sesión (redondeado)
+        JButton loginButton = createRoundedButton("Iniciar sesión", poppins);
         loginButton.setBackground(Color.WHITE);
         loginButton.setForeground(Color.decode("#ff914d"));
-        loginButton.setFocusPainted(false);
-        loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        loginButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
-        loginButton.addActionListener(e -> {
-            new LoginFrame(); // abre la nueva ventana
-            //dispose(); // opcional: cerrar la actual
-        });
+        loginButton.addActionListener(e -> new LoginFrame());
+        loginButton.setMaximumSize(new Dimension(160, 2)); // Ajusta tamaño si lo deseas
 
         header.add(leftHeader, BorderLayout.WEST);
         header.add(loginButton, BorderLayout.EAST);
