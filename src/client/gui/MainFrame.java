@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
         loginButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
         loginButton.addActionListener(e -> {
             new LoginFrame(); // abre la nueva ventana
-            dispose(); // opcional: cerrar la actual
+            //dispose(); // opcional: cerrar la actual
         });
 
         header.add(leftHeader, BorderLayout.WEST);
@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
     }
 
     // Métodos auxiliares
-    private Font loadFont(String path, float size) {
+    public static Font loadFont(String path, float size) {
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(size);
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
